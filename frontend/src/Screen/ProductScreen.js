@@ -1,11 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap';
 import Rating from '../components/Rating/Rating';
-import products from '../components/util/products';
+// import products from '../components/util/products';
+import axios from 'axios';
 
 const ProductScreen = ({ match }) => {
-  const product = products.find((p) => p._id === match.params.id);
+  const [product, setProduct] = useState([]);
+
+  useEffect(() => {
+    const uri = `/api/products/${match.params.id}`;
+    const fetchProducts = async () => {
+      const { data } = await axios.get(uri);
+      setProduct(data);
+    };
+    fetchProducts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // const product = products.find((p) => p._id === match.params.id);
 
   return (
     <>
