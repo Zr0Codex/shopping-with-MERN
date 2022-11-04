@@ -17,3 +17,7 @@ node_modules/
 
 # history
 .history
+
+build/
+
+.vscode/
